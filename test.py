@@ -1,8 +1,13 @@
 import pyupbit
 
-access = "your-access"          # 본인 값으로 변경
-secret = "your-secret"          # 본인 값으로 변경
+access = "W0ODVTu70XbtN580h7xCFP2WC3obxXGVNj50R7p0"
+secret = "UuO2gv2fb8AWrlyaVUkgkIpNkPX5ooZNu8RmsKgV"
 upbit = pyupbit.Upbit(access, secret)
 
-print(upbit.get_balance("KRW-BTC"))     # KRW-BTC 조회
-print(upbit.get_balance("KRW"))         # 보유 현금 조회
+krw = upbit.get_balance("KRW")    # KRW-BTC 조회
+
+for i in range(10):
+    if krw > 0:
+        continue
+    else:
+        print(3)
