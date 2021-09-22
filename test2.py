@@ -1,3 +1,4 @@
+import pandas as pd
 import time
 import pyupbit
 import datetime
@@ -12,7 +13,7 @@ def predict_price(ticker):
     df['ds'] = df['index']
     df['y'] = df['close']
     data = df[['ds','y']]
-    model = prophet()
+    model = Prophet()
     model.fit(data)
     future = model.make_future_dataframe(periods=24, freq='h')
     forecast = model.predict(future)
@@ -21,5 +22,8 @@ def predict_price(ticker):
         closedf = forecast[forecast['ds'] == data.iloc[-1]['ds'].replace(hour=9)]
     closevalue = closedf['yhat'].values[0]
     predicted_close_price = closevalue
-predict_price("krw-btc")
-schedule.every().hour.do(lambda: predict_price("krw-btc"))
+
+    forecast.to_csv('test.csv')
+    return forecast
+print(predict_price("krw-btc"))
+#schedule.every().hour.do(lambda: predict_price("krw-btc"))
